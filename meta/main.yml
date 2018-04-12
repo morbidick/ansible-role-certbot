@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: morbidick
+  description: Installs certbot and configures certificates
+  license: MIT
+  min_ansible_version: 2.2
+
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+
+  categories:
+  - web
+dependencies: []

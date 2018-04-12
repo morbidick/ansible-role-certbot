@@ -1,0 +1,38 @@
+---
+- name: enable ppa
+  apt_repository:
+    repo: 'ppa:certbot/certbot'
+  when: ansible_pkg_mgr == "apt"
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_pkg_mgr == "apt"
+
+- name: install certbot
+  package:
+    name: certbot
+    state: latest
+
+- name: create config
+  template:
+    dest: "/etc/letsencrypt/cli.ini"
+    src: "etc/letsencrypt/cli.ini"
+
+- name: create challenge directory
+  file:
+    path: "{{ certbot_challenge_dir }}"
+    state: directory
+
+- name: ensure timer is activated
+  systemd:
+    name: certbot.timer
+    state: started
+    enabled: True
+
+- name: request certs
+  command: "certbot certonly -d {{ item.host }} -m {{ item.mail | default(certbot_mail) }} --agree-tos --noninteractive {% if certbot_staging %}--staging{% endif %}"
+  args:
+    creates: "{{ certbot_cert_path }}"
+  with_items: "{{ certbot_certs }}"

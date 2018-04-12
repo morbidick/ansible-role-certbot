@@ -1,0 +1,9 @@
+---
+- hosts: all
+
+  roles:
+    - role_under_test
+
+  vars:
+    certbot_mail: me@example.com
+    certbot_staging: True

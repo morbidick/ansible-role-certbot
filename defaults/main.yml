@@ -1,0 +1,7 @@
+---
+certbot_certs: []
+certbot_staging: False
+certbot_live_home: "/etc/letsencrypt/live"
+certbot_challenge_dir: "/var/www/letsencrypt"
+certbot_post_hook: "systemctl reload nginx"
+certbot_cert_path: "/etc/letsencrypt/live/{{ item.host }}/fullchain.pem"
