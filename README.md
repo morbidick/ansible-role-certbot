@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/morbidick/ansible-role-certbot.svg?branch=master)](https://travis-ci.org/morbidick/ansible-role-certbot)
 
-Installs certbot and configures certificates. For a complete setup with nginx see [the full example](https://github.com/morbidick/ansible-role-certbot-vhosts/blob/master/webserver.md).
+Installs certbot and configures certificates. For a complete setup with nginx see [the full example](https://github.com/morbidick/ansible-role-nginx-vhosts/blob/master/webserver.md).
 
 ## Requirements
 
