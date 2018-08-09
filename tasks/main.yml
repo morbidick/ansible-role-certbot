@@ -30,6 +30,7 @@
     name: certbot.timer
     state: started
     enabled: True
+  when: ansible_service_mgr == "systemd"
 
 - name: request certs
   command: "certbot certonly -d {{ item.host }} -m {{ item.mail | default(certbot_mail) }} --agree-tos --noninteractive {% if certbot_staging %}--staging{% endif %}"
