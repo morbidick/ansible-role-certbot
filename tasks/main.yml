@@ -4,7 +4,7 @@
     repo: 'ppa:certbot/certbot'
   when: 
     - ansible_pkg_mgr == "apt"
-    - ansible_lsb.major_release|int <= 20
+    - ansible_lsb.major_release|int < 20
 
 - name: update apt cache
   apt:
