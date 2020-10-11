@@ -12,7 +12,6 @@
     cache_valid_time: 3600
   when:
    - ansible_pkg_mgr == "apt"
-   - ansible_facts.packages["certbot"] is undefined
 
 - name: install certbot
   package:
