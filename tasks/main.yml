@@ -2,13 +2,16 @@
 - name: enable ppa
   apt_repository:
     repo: 'ppa:certbot/certbot'
-  when: ansible_pkg_mgr == "apt"
+  when: 
+    - ansible_pkg_mgr == "apt"
+    - ansible_lsb.major_release|int < 20
 
 - name: update apt cache
   apt:
     update_cache: yes
     cache_valid_time: 3600
-  when: ansible_pkg_mgr == "apt"
+  when:
+   - ansible_pkg_mgr == "apt"
 
 - name: install certbot
   package:
