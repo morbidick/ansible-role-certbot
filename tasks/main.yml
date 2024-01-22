@@ -5,6 +5,7 @@
   when: 
     - ansible_pkg_mgr == "apt"
     - ansible_lsb.major_release|int < 20
+    - ansible_distribution == 'Ubuntu'
 
 - name: update apt cache
   apt:
