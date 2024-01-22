@@ -41,11 +41,11 @@
   args:
     creates: "{{ certbot_cert_path }}"
   with_items: "{{ certbot_certs }}"
-  when: item.type != "disabled"
+  when: item.type | default('enabled') != "disabled"
 
 - name: remove disabled certs
   command: "certbot delete --cert-name {{ item.host }}"
   args:
     removes: "{{ certbot_renewal_path }}"
   with_items: "{{ certbot_certs }}"
-  when: item.type == "disabled"
+  when: item.type | default('enabled') == "disabled"
