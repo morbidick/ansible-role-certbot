@@ -37,7 +37,14 @@
   when: ansible_service_mgr == "systemd"
 
 - name: request certs
-  command: "certbot certonly -d {{ item.host }} -m {{ item.mail | default(certbot_mail) }} --agree-tos --noninteractive {% if certbot_staging %}--staging{% endif %}"
+  command: >-
+    certbot certonly
+    {{ item.host | map('regex_replace', '^(.*)$', '-d \1') | join(' ') }}
+    -m {{ item.mail | default(certbot_mail) }}
+    --agree-tos
+    --noninteractive
+    --expand
+    {% if certbot_staging %}--staging{% endif %}
   args:
     creates: "{{ certbot_cert_path }}"
   with_items: "{{ certbot_certs }}"
